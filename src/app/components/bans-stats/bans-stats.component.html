@@ -2,23 +2,26 @@
 	Bans stats
 </p>
 <div class="card shadow bg-transparent border-0">
-	<div class="card-body">
+	<div class="card-body position-relative">
 		<div class="row">
-			<div class="col">
+			<div class="col-10">
 				<div class="list-group">
 					<div
-						class="list-group-item p-0 mb-2"
+						class="list-group-item p-0 pt-2 px-2 border-bottom"
 						*ngFor="let reason of reasonsNames, index as index"
 					>
-						<h4 class="mb-0">{{ reason }}</h4>
-						<span class="badge badge-danger">{{ reasonsAmounts[index] }} BANS</span>
-						| {{ reasonsAmountsEnded[index] }} ended
+						<h3 class="mb-0">
+							<span class="reason">{{ reason }}</span>
+							<span class="badge badge-danger amount">{{ reasonsAmounts[index] }} BANS</span>
+							<span class="permanent ml-1">{{ reasonsAmountsPermanent[index] }} permanent</span>
+						</h3>
+
 					</div>
 				</div>
 			</div>
-			<div class="col text-right">
+			<div class="col-2 text-right panel">
 				<div>
-					Analized for <strong>{{ bansAnalized }}</strong> recent bans<br>
+					Analized <strong>{{ bansAnalized }}</strong> recent bans<br>
 				</div>
 				<div class="mt-2">
 					Analized for<br>
@@ -28,6 +31,8 @@
 					<button
 						class="btn btn-danger mt-2"
 						(click)="analizeNext()"
+						[ngClass]="{'disabled': !canAnalizeNext}"
+						[disabled]="!canAnalizeNext"
 					>
 						Analize next {{ step }} bans <i class="bx bx-analyse fix"></i>
 					</button>

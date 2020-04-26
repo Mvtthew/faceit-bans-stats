@@ -1,4 +1,21 @@
-.badge-danger {
-	font-size: 0.8rem;
-	font-weight: 100;
+.list-group-item {
+	transition: 0.2s all;
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+
+	.reason {
+		width: 900px;
+		display: inline-block;
+	}
+
+	.amount {
+		width: 150px;
+		font-size: 0.9rem;
+		font-weight: 100;
+	}
+
+	.permanent {
+		font-size: 0.8rem;
+	}
 }

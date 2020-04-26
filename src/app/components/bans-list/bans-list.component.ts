@@ -14,7 +14,7 @@ export class BansListComponent implements OnInit {
 	constructor(private faceitService: FaceitService) { }
 
 	ngOnInit(): void {
-		this.faceitService.getBans(1, 500).subscribe(bans => this.bansList = bans.payload);
+		this.faceitService.getBans(1, 100).subscribe(bans => this.bansList = bans.payload);
 	}
 
 }

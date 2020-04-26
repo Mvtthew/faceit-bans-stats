@@ -13,9 +13,12 @@ export class BansStatsComponent implements OnInit {
 	page: number = 0;
 	step: number = 2000;
 
+	canAnalizeNext: boolean = true;
+
 	reasonsNames: string[] = [];
 	reasonsAmounts: number[] = [];
 	reasonsAmountsEnded: number[] = [];
+	reasonsAmountsPermanent: number[] = [];
 
 	dateSince: Date = new Date(0);
 	dateTo: Date = new Date();
@@ -29,7 +32,12 @@ export class BansStatsComponent implements OnInit {
 
 	getNewBans(): void {
 		this.faceitService.getBans(this.page, this.step).subscribe(bans => {
-			this.analyzeBans(bans.payload);
+
+			if (bans.payload.length > 0) {
+				this.analyzeBans(bans.payload);
+			} else {
+				this.canAnalizeNext = false;
+			}
 		});
 	}
 
@@ -40,10 +48,14 @@ export class BansStatsComponent implements OnInit {
 			const startsAt = new Date(ban.starts_at);
 			const endsAt = new Date(ban.ends_at);
 
+			if (ban.ends_at) {
+				console.log(ban.ends_at);
+			}
+
 			if (startsAt.valueOf() > this.dateSince.valueOf()) {
 				this.dateSince = startsAt;
 			}
-			if (endsAt.valueOf() < this.dateTo.valueOf()) {
+			if (startsAt.valueOf() < this.dateSince.valueOf()) {
 				this.dateTo = startsAt;
 			}
 
@@ -52,18 +64,31 @@ export class BansStatsComponent implements OnInit {
 				const index = this.reasonsNames.findIndex(reason => reason == ban.reason);
 				this.reasonsAmounts[index]++;
 
-				if (endsAt.valueOf() >= this.dateNow.valueOf()) {
-					this.reasonsAmountsEnded[index]++;
+				if (ban.ends_at) {
+					if (endsAt.valueOf() <= this.dateNow.valueOf()) {
+						this.reasonsAmountsEnded[index]++;
+						console.log(endsAt.valueOf());
+						console.log(this.dateNow.valueOf());
+					}
+				} else {
+					this.reasonsAmountsPermanent[index]++;
 				}
+
 
 			} else {
 				this.reasonsNames.push(ban.reason);
 				this.reasonsAmounts.push(1);
 
-				if (endsAt.valueOf() >= this.dateNow.valueOf()) {
-					this.reasonsAmountsEnded.push(1);
-				} else {
+				if (!ban.ends_at) {
+					this.reasonsAmountsPermanent.push(1);
 					this.reasonsAmountsEnded.push(0);
+				} else {
+					this.reasonsAmountsPermanent.push(0);
+					if (endsAt.valueOf() <= this.dateNow.valueOf()) {
+						this.reasonsAmountsEnded.push(1);
+					} else {
+						this.reasonsAmountsEnded.push(0);
+					}
 				}
 			}
 
