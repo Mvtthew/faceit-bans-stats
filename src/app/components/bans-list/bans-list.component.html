@@ -1,7 +1,9 @@
 <div>
 	<app-ban-header></app-ban-header>
-	<app-ban-element
-		*ngFor="let ban of bansList"
-		[ban]="ban"
-	></app-ban-element>
+	<div class="list-group">
+		<app-ban-element
+			*ngFor="let ban of bansList"
+			[ban]="ban"
+		></app-ban-element>
+	</div>
 </div>
