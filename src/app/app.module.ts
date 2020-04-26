@@ -8,6 +8,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 // Material
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
 	declarations: [
@@ -17,7 +19,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
-		MatToolbarModule
+		MatToolbarModule,
+		MatButtonModule,
+		MatIconModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
