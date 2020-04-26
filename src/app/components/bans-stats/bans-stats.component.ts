@@ -41,29 +41,26 @@ export class BansStatsComponent implements OnInit {
 		});
 	}
 
+	setFromToDates(startsAt: Date): void {
+		if (startsAt.valueOf() > this.dateSince.valueOf()) {
+			this.dateSince = startsAt;
+		}
+		if (startsAt.valueOf() < this.dateSince.valueOf()) {
+			this.dateTo = startsAt;
+		}
+	}
+
 	analyzeBans(bans: Ban[]) {
 		this.bansAnalized += bans.length;
 		bans.forEach(ban => {
 
 			const startsAt = new Date(ban.starts_at);
 			const endsAt = new Date(ban.ends_at);
-
-			if (ban.ends_at) {
-				console.log(ban.ends_at);
-			}
-
-			if (startsAt.valueOf() > this.dateSince.valueOf()) {
-				this.dateSince = startsAt;
-			}
-			if (startsAt.valueOf() < this.dateSince.valueOf()) {
-				this.dateTo = startsAt;
-			}
-
+			this.setFromToDates(startsAt);
 
 			if (this.reasonsNames.includes(ban.reason)) {
 				const index = this.reasonsNames.findIndex(reason => reason == ban.reason);
 				this.reasonsAmounts[index]++;
-
 				if (ban.ends_at) {
 					if (endsAt.valueOf() <= this.dateNow.valueOf()) {
 						this.reasonsAmountsEnded[index]++;
@@ -73,8 +70,6 @@ export class BansStatsComponent implements OnInit {
 				} else {
 					this.reasonsAmountsPermanent[index]++;
 				}
-
-
 			} else {
 				this.reasonsNames.push(ban.reason);
 				this.reasonsAmounts.push(1);
@@ -91,8 +86,6 @@ export class BansStatsComponent implements OnInit {
 					}
 				}
 			}
-
-
 		});
 	}
 
