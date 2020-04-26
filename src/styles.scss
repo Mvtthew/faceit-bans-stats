@@ -1,12 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope&display=swap");
+
 $list-group-bg: #303030;
 $list-group-border-width: 0;
-.list-group-item {
-	border-radius: 1rem !important;
-}
+
+$danger: #e91d63;
 
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 
+.bx {
+	&.fix {
+		position: relative;
+		bottom: -1px;
+	}
+}
+@import "../node_modules/boxicons/css/boxicons.min.css";
+
 body {
+	font-family: "Manrope" !important;
 	background-color: #303030;
 	color: #f3f3f3;
 }

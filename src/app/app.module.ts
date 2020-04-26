@@ -9,6 +9,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { BansListComponent } from './components/bans-list/bans-list.component';
 import { BanElementComponent } from './components/ban-element/ban-element.component';
 import { BanHeaderComponent } from './components/ban-header/ban-header.component';
+import { BansStatsComponent } from './components/bans-stats/bans-stats.component';
 
 @NgModule({
 	declarations: [
@@ -16,7 +17,8 @@ import { BanHeaderComponent } from './components/ban-header/ban-header.component
 		ToolbarComponent,
 		BansListComponent,
 		BanElementComponent,
-		BanHeaderComponent
+		BanHeaderComponent,
+		BansStatsComponent
 	],
 	imports: [
 		BrowserModule,
