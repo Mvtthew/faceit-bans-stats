@@ -50,6 +50,25 @@ export class BansStatsComponent implements OnInit {
 		}
 	}
 
+	sortBans(): void {
+		for (let i = 0; i < this.reasonsAmounts.length; i++) {
+			for (let j = i + 1; j < this.reasonsAmounts.length; j++) {
+				if (this.reasonsAmounts[j] > this.reasonsAmounts[i]) {
+					this.swapElements(this.reasonsAmounts, i, j);
+					this.swapElements(this.reasonsNames, i, j);
+					this.swapElements(this.reasonsAmountsPermanent, i, j);
+					this.swapElements(this.reasonsAmountsEnded, i, j);
+				}
+			}
+		}
+	}
+
+	swapElements(array: Array<any>, i: number, j: number): any {
+		const temp = array[j];
+		array[j] = array[i];
+		array[i] = temp;
+	}
+
 	analyzeBans(bans: Ban[]) {
 		this.bansAnalized += bans.length;
 		bans.forEach(ban => {
@@ -87,6 +106,8 @@ export class BansStatsComponent implements OnInit {
 				}
 			}
 		});
+
+		this.sortBans();
 	}
 
 	analizeNext(): void {
