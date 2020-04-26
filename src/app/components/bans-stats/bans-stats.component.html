@@ -1,4 +1,4 @@
-<p class="mt-5 display-4">
+<p class="mt-5 display-4 ml-2 pl-2">
 	Bans stats
 </p>
 <div class="card shadow bg-transparent border-0">
@@ -20,22 +20,24 @@
 				</div>
 			</div>
 			<div class="col-2 text-right panel">
-				<div>
-					Analized <strong>{{ bansAnalized }}</strong> recent bans<br>
-				</div>
-				<div class="mt-2">
-					Analized for<br>
-					{{ dateSince | date:"dd/MM/yy HH:MM" }} - {{ dateTo | date:"dd/MM/yy HH:MM" }}
-				</div>
-				<div class="mt-2">
-					<button
-						class="btn btn-danger mt-2"
-						(click)="analizeNext()"
-						[ngClass]="{'disabled': !canAnalizeNext}"
-						[disabled]="!canAnalizeNext"
-					>
-						Analize next {{ step }} bans <i class="bx bx-analyse fix"></i>
-					</button>
+				<div class="mr-2">
+					<div>
+						Analized <strong>{{ bansAnalized }}</strong> recent bans<br>
+					</div>
+					<div class="mt-2">
+						Analized for<br>
+						{{ dateSince | date:"dd/MM/yy HH:MM" }} - {{ dateTo | date:"dd/MM/yy HH:MM" }}
+					</div>
+					<div class="mt-2">
+						<button
+							class="btn btn-danger mt-2"
+							(click)="analizeNext()"
+							[ngClass]="{'disabled': !canAnalizeNext}"
+							[disabled]="!canAnalizeNext"
+						>
+							Analize next {{ step }} bans <i class="bx bx-analyse fix"></i>
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
