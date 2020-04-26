@@ -12,8 +12,8 @@ export class FaceitService {
 
 	constructor(private http: HttpClient) { }
 
-	getBans(page: number, size: number): Observable<Ban[]> {
-		return this.http.get<Ban[]>(`${this.apiUrl}/bans?page=${page}&size=${size}`);
+	getBans(page: number, size: number): Observable<any> {
+		return this.http.get<any>(`${this.apiUrl}/bans?page=${page}&size=${size}`);
 	}
 
 }

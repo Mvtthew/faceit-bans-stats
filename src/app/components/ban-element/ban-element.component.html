@@ -1,0 +1,39 @@
+<div class="ban">
+	<div class="list">
+
+		<span class="nickname">
+			{{ ban.nickname }}
+		</span>
+
+		<span class="type">
+			{{ ban.type }}
+		</span>
+
+		<span class="reason">
+			{{ ban.reason }}
+		</span>
+
+		<span class="starts-at">
+			{{ ban.starts_at | date }}
+		</span>
+
+		<span class="ends-at">
+			<span *ngIf="ban.ends_at">
+				{{ ban.ends_at | date }}
+			</span>
+			<span *ngIf="!ban.ends_at">
+				Permanent
+			</span>
+
+		</span>
+
+		<span class="game">
+			<span *ngIf="ban.game">
+				{{ ban.game }}
+			</span>
+			<span *ngIf="!ban.game">
+				Global
+			</span>
+		</span>
+	</div>
+</div>

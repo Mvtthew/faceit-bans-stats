@@ -1,5 +1,7 @@
 <div>
-	<p>
-		{{ bansList }}
-	</p>
+	<app-ban-header></app-ban-header>
+	<app-ban-element
+		*ngFor="let ban of bansList"
+		[ban]="ban"
+	></app-ban-element>
 </div>
